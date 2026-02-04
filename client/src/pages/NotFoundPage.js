@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { FiHome, FiAlertcircle } from 'react-icons/fi';
+import { FiHome } from 'react-icons/fi';
 
 const NotFoundPage = () => {
     const navigate = useNavigate();

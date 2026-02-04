@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiUser, FiMail, FiLock, FiUserPlus, FiEye, FiEyeOff } from 'react-icons/fi';
-import toast from 'react-hot-toast';
+
 import { useAuth } from '../../context/AuthContext';
 
 const RegisterPage = () => {
