@@ -55,7 +55,8 @@ export const AuthProvider = ({ children }) => {
         const loadingToast = toast.loading('Logging in...');
 
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+            const res = await axios.post(`${apiUrl}/api/auth/login`, formData);
             setToken(res.data.token);
             toast.success('Welcome back! 🎉', { id: loadingToast });
             return { success: true };
@@ -74,7 +75,8 @@ export const AuthProvider = ({ children }) => {
         const loadingToast = toast.loading('Creating your account...');
 
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/register', formData);
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+            const res = await axios.post(`${apiUrl}/api/auth/register`, formData);
             setToken(res.data.token);
             toast.success('Account created successfully! 🎉', { id: loadingToast });
             return { success: true };

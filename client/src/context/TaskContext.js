@@ -33,7 +33,8 @@ export const TaskProvider = ({ children }) => {
 
     // Socket.IO setup
     useEffect(() => {
-        const socket = io('http://localhost:5000');
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+        const socket = io(apiUrl);
 
         socket.on('taskCreated', (task) => {
             setTasks(prev => [task, ...prev]);
@@ -65,7 +66,8 @@ export const TaskProvider = ({ children }) => {
 
         setLoading(true);
         try {
-            const res = await axios.get('http://localhost:5000/tasks', {
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+            const res = await axios.get(`${apiUrl}/tasks`, {
                 headers: { 'x-auth-token': token }
             });
             setTasks(res.data);
@@ -83,7 +85,8 @@ export const TaskProvider = ({ children }) => {
         const loadingToast = toast.loading('Creating task...');
 
         try {
-            await axios.post('http://localhost:5000/tasks', taskData, {
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+            await axios.post(`${apiUrl}/tasks`, taskData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'x-auth-token': token
@@ -103,7 +106,8 @@ export const TaskProvider = ({ children }) => {
         const loadingToast = toast.loading('Updating task...');
 
         try {
-            await axios.put(`http://localhost:5000/tasks/${id}`, taskData, {
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+            await axios.put(`${apiUrl}/tasks/${id}`, taskData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'x-auth-token': token
@@ -123,7 +127,8 @@ export const TaskProvider = ({ children }) => {
         const loadingToast = toast.loading('Deleting task...');
 
         try {
-            await axios.delete(`http://localhost:5000/tasks/${id}`, {
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+            await axios.delete(`${apiUrl}/tasks/${id}`, {
                 headers: { 'x-auth-token': token }
             });
             toast.success('Task deleted successfully! 🗑️', { id: loadingToast });

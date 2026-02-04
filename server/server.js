@@ -16,13 +16,18 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: "*", // Allow all origins for dev
-        methods: ["GET", "POST", "PUT", "DELETE"]
+        origin: process.env.CLIENT_URL || "*",
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        credentials: true
     }
 });
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: process.env.CLIENT_URL || "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
 app.use(express.json());
 
 // Inject Socket.IO into Request
